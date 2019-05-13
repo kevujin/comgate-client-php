@@ -54,6 +54,14 @@ abstract class BaseResponse
 
 
     /**
+     * @return int
+     */
+    public function getCode(): int
+    {
+        return $this->code;
+    }
+
+    /**
      * @return string
      */
     public function getMessage(): string
