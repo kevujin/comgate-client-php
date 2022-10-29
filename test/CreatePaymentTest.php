@@ -437,12 +437,4 @@ class CreatePaymentTest extends TestCase
 
         $this->assertSame('create', $createPayment->getEndPoint());
     }
-
-
-    public function testGetResponseClass()
-    {
-        $createPayment = $this->create();
-
-        $this->assertSame(CreatePaymentResponse::class, $createPayment->getResponseClass());
-    }
 }

@@ -9,23 +9,20 @@ interface RequestInterface
     /**
      * @return array
      */
-    public function getData();
+    public function getData(): array;
 
 
     /**
      * @return bool
      */
-    public function isPost();
+    public function isPost(): bool;
 
 
     /**
      * @return string
      */
-    public function getEndPoint();
+    public function getEndPoint(): string;
 
 
-    /**
-     * @return string
-     */
-    public function getResponseClass();
+    public function getResponseObject(array $data);
 }
