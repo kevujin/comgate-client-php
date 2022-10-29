@@ -1,9 +1,9 @@
 [![Build Status](https://travis-ci.org/renat-magadiev/comgate-client.svg?branch=master)](https://travis-ci.org/renat-magadiev/comgate-client) [![Coverage Status](https://coveralls.io/repos/github/renat-magadiev/comgate-client/badge.svg?branch=master)](https://coveralls.io/github/renat-magadiev/comgate-client?branch=master)
 
 # Comgate API client
-Comgate API client wrapper
+Comgate API client wrapper conatining all available developed request/responses
 
-This package allow you to create payment using Comgate API and get redirect URL to your customers
+Is forked from from tomasz-kusy/comgate-client and contains also updates from renat-magadiev/comgate-client which is the original developer
 
 Requirements
 -------------
@@ -13,7 +13,7 @@ Requirements
 Installation
 ------------
 ```sh
-$ composer require renat-magadiev/comgate-client
+$ composer require kevujin/comgate-client
 ```
 
 

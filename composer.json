@@ -1,12 +1,12 @@
 {
-  "name": "renat-magadiev/comgate-client",
-  "description": "Comgate client wrapper",
+  "name": "kevujin/comgate-client",
+  "description": "Comgate client wrapper conatining all available developed request/responses",
   "minimum-stability": "stable",
   "license": "MIT",
   "authors": [
     {
-      "name": "Renat Magadiev",
-      "email": "renatmagadiev@gmail.com"
+      "name": "Kevujin",
+      "email": "kevujin@gmail.com"
     }
   ],
   "require": {
