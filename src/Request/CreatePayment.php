@@ -5,7 +5,7 @@ namespace Comgate\Request;
 
 use Comgate\Client;
 use Comgate\Enum\Method;
-use Comgate\Response\CreatePaymentResponse;
+use Comgate\Response\CreatePayment as CreatePaymentResponse;
 
 /**
  * Class CreatePayment
@@ -80,12 +80,10 @@ class CreatePayment extends BaseRequest
     }
 
     /**
-     * @param array $rawData
-     * @return CreatePaymentResponse
      * @throws \Comgate\Exception\ErrorCodeException
      * @throws \Comgate\Exception\InvalidArgumentException
      */
-    public function getResponseObject(array $rawData): CreatePaymentResponse
+    public function getResponseObject(string $rawData): CreatePaymentResponse
     {
         return new CreatePaymentResponse($rawData);
     }

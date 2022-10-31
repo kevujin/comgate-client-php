@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Comgate\Request;
 
 use Comgate\Client;
-use Comgate\Response\CreateRepeatedResponse;
+use Comgate\Response\CreateRepeated as CreateRepeatedResponse;
 
 /**
  * Class CreateRecurring
@@ -81,8 +81,6 @@ class CreateRepeated extends BaseRequest
 
 
     /**
-     * @param Client $client
-     * @return CreateRepeatedResponse
      * @throws \Comgate\Exception\ErrorCodeException
      * @throws \Comgate\Exception\InvalidArgumentException
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -94,12 +92,10 @@ class CreateRepeated extends BaseRequest
 
 
     /**
-     * @param array $rawData
-     * @return CreateRepeatedResponse
      * @throws \Comgate\Exception\ErrorCodeException
      * @throws \Comgate\Exception\InvalidArgumentException
      */
-    public function getResponseObject(array $rawData): CreateRepeatedResponse
+    public function getResponseObject(string $rawData): CreateRepeatedResponse
     {
         return new CreateRepeatedResponse($rawData);
     }

@@ -3,36 +3,32 @@ declare(strict_types=1);
 
 namespace Comgate\Response;
 
+use Comgate\Enum\ResponseCode;
 use Comgate\Exception\InvalidArgumentException;
 
 class GetMethods extends BaseResponse
 {
-
-    private array $data;
+    public array $methods = [];
 
     /**
-     * @param array $rawData
      * @throws InvalidArgumentException
      * @throws ErrorCodeException
      */
-    public function __construct(array $rawData)
+    public function __construct(string $rawData)
     {
-        if (!isset($rawData['error'])) {
+        $data = json_decode($rawData, true);
+
+        if (!isset($data['error'])) {
             // simulate success as this is expected
-            $rawData['code'] = 200;
-            $rawData['message'] = 'OK';
+            $data['code'] = ResponseCode::CODE_OK;
+            $data['message'] = 'OK';
         } else {
-            $rawData = $rawData['error'];
-            $rawData['message'] .= ' / ' . $rawData['extraMessage'] ?? '-';
+            $data = $data['error'];
+            $data['message'] .= ' / ' . ($data['extraMessage'] ?? '-');
         }
 
-        parent::__construct($rawData);
+        parent::__construct($data);
 
-        $this->data = $rawData;
-    }
-
-    public function getData(): array
-    {
-        return $this->data;
+        $this->methods = $data['methods'] ?? [];
     }
 }

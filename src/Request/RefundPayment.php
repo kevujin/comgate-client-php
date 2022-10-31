@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Comgate\Request;
 
 use Comgate\Client;
-use Comgate\Response\RefundPaymentResponse;
+use Comgate\Response\RefundPayment as RefundPaymentResponse;
 
 /**
  * Class RefundPayment
@@ -88,8 +88,6 @@ class RefundPayment extends BaseRequest
     }
 
     /**
-     * @param Client $client
-     * @return RefundPaymentResponse
      * @throws \Comgate\Exception\ErrorCodeException
      * @throws \Comgate\Exception\InvalidArgumentException
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -101,12 +99,10 @@ class RefundPayment extends BaseRequest
 
 
     /**
-     * @param array $rawData
-     * @return RefundPaymentResponse
      * @throws \Comgate\Exception\ErrorCodeException
      * @throws \Comgate\Exception\InvalidArgumentException
      */
-    public function getResponseObject(array $rawData): RefundPaymentResponse
+    public function getResponseObject(string $rawData): RefundPaymentResponse
     {
         return new RefundPaymentResponse($rawData);
     }

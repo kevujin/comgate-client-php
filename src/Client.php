@@ -82,9 +82,8 @@ class Client
             ]);
         }
 
-        $body = (string)$response->getBody();
-        parse_str($body, $data);
+        $body = (string) $response->getBody();
 
-        return $request->getResponseObject($data);
+        return $request->getResponseObject($body);
     }
 }

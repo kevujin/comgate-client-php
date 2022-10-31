@@ -20,20 +20,25 @@ abstract class BaseResponse
     private $message;
 
     /**
-     * @param array $rawData
      * @throws InvalidArgumentException
      * @throws ErrorCodeException
      */
-    public function __construct(array $rawData)
+    public function __construct($rawData)
     {
-        if (isset($rawData['code'])) {
-            $this->code = (int)$rawData['code'];
+        if (is_string($rawData)) {
+            $data = $this->parseInput($rawData);
+        } else {
+            $data = (array) $rawData;
+        }
+
+        if (isset($data['code'])) {
+            $this->code = (int) $data['code'];
         } else {
             throw new InvalidArgumentException('Missing "code" in response');
         }
 
-        if (isset($rawData['message'])) {
-            $this->message = $rawData['message'];
+        if (isset($data['message'])) {
+            $this->message = $data['message'];
         } else {
             throw new InvalidArgumentException('Missing "message" in response');
         }
@@ -43,27 +48,23 @@ abstract class BaseResponse
         }
     }
 
+    protected function parseInput(string $rawData)
+    {
+        parse_str($rawData, $data);
 
-    /**
-     * @return bool
-     */
+        return $data;
+    }
+
     public function isOk(): bool
     {
         return $this->code === ResponseCode::CODE_OK;
     }
 
-
-    /**
-     * @return int
-     */
     public function getCode(): int
     {
         return $this->code;
     }
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;

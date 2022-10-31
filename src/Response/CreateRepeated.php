@@ -6,34 +6,27 @@ namespace Comgate\Response;
 use Comgate\Exception\ErrorCodeException;
 use Comgate\Exception\InvalidArgumentException;
 
-class CreateRepeatedResponse extends BaseResponse
+class CreateRepeated extends BaseResponse
 {
-    /**
-     * @var string
-     */
     private $transId;
 
     /**
-     * @param array $rawData
      * @throws InvalidArgumentException
      * @throws ErrorCodeException
      */
-    public function __construct(array $rawData)
+    public function __construct(string $rawData)
     {
+        $data = $this->parseInput($rawData);
 
-        parent::__construct($rawData);
+        parent::__construct($data);
 
-        if (isset($rawData['transId'])) {
-            $this->transId = $rawData['transId'];
+        if (isset($data['transId'])) {
+            $this->transId = $data['transId'];
         } else {
             throw new InvalidArgumentException('Missing "transId" in response');
         }
     }
 
-
-    /**
-     * @return string
-     */
     public function getTransId(): string
     {
         return $this->transId;

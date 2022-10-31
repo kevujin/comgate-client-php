@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Comgate\Request;
 
+use Comgate\Client;
 use Comgate\Response\GetMethods as GetMethodsResponse;
 
 class GetMethods extends BaseRequest
@@ -39,12 +40,21 @@ class GetMethods extends BaseRequest
         return false;
     }
 
+    /**
+     * @throws \Comgate\Exception\ErrorCodeException
+     * @throws \Comgate\Exception\InvalidArgumentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function send(Client $client): GetMethodsResponse
+    {
+        return $client->send($this);
+    }
+
   /**
-     * @param array $rawData
      * @throws \Comgate\Exception\ErrorCodeException
      * @throws \Comgate\Exception\InvalidArgumentException
      */
-    public function getResponseObject(array $rawData): GetMethodsResponse
+    public function getResponseObject(string $rawData): GetMethodsResponse
     {
         return new GetMethodsResponse($rawData);
     }

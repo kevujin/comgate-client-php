@@ -6,54 +6,40 @@ namespace Comgate\Response;
 use Comgate\Exception\ErrorCodeException;
 use Comgate\Exception\InvalidArgumentException;
 
-class CreatePaymentResponse extends BaseResponse
+class CreatePayment extends BaseResponse
 {
-    /**
-     * @var string
-     */
-    private $transId;
+    private string $transId;
+
+    private string $redirect;
 
     /**
-     * @var string
-     */
-    private $redirect;
-
-
-    /**
-     * @param array $rawData
      * @throws InvalidArgumentException
      * @throws ErrorCodeException
      */
-    public function __construct(array $rawData)
+    public function __construct(string $rawData)
     {
-        parent::__construct($rawData);
+        $data = $this->parseInput($rawData);
 
-        if (isset($rawData['transId'])) {
-            $this->transId = $rawData['transId'];
+        parent::__construct($data);
+
+        if (isset($data['transId'])) {
+            $this->transId = $data['transId'];
         } else {
             throw new InvalidArgumentException('Missing "transId" in response');
         }
 
-        if (isset($rawData['redirect'])) {
-            $this->redirect = $rawData['redirect'];
+        if (isset($data['redirect'])) {
+            $this->redirect = $data['redirect'];
         } else {
             throw new InvalidArgumentException('Missing "redirect" in response');
         }
     }
 
-
-    /**
-     * @return string
-     */
     public function getTransId(): string
     {
         return $this->transId;
     }
 
-
-    /**
-     * @return string
-     */
     public function getRedirectUrl(): string
     {
         return $this->redirect;
