@@ -100,7 +100,39 @@ $getMethods = new GetMethods(
 
 $getMethodsResponse = $client->send($getMethods);
 var_dump($getMethodsResponse->methods);
-
+var_dump($getMethodsResponse->getMethod('BANK_ALL')); // exact one method
 ```
 
 `GetMethods` response and request class are described in Comgate [documentation](https://help.comgate.cz/docs/protocol-api-en#obtaining-allowed-methods)
+
+List transfers
+------------
+Get the list of fund transfer for provided date. There might be more transfers in one day than only one or there can be none.
+Transfers are used to be processed about 15:00 GMT.
+
+```php
+use Comgate\Request\ListTransfers;
+
+$listTransfers = new ListTransfers(
+    date('Y-m-d') // let's look for today 
+);
+
+$listTransfersResponse = $client->send($listTransfers);
+var_dump($listTransfersResponse->transfers); // collection of Response\Item\Transfer
+```
+
+`ListTransfers` response and request class are described in Comgate [documentation](https://help.comgate.cz/docs/protocol-api-en#list-of-transfers-within-the-day)
+
+
+For each transfer there is another API call to get its detail (exact payments) which are included in such transfer
+
+```php
+foreach ($listTransfersResponse->transfers as $transfer) { // transfer is object Response\Item\Transfer
+    $getTransferRequest = $transfer->createRequest(); // Request\GetTransfer
+
+    $getTransferResponse = $client->send($getTransferRequest);
+    var_dump($getTransferResponse->transferItems); // collection of Response\Item\TransferItem
+}
+```
+
+`GetTransfer` response and request class are described in Comgate [documentation](https://help.comgate.cz/docs/protocol-api-en#detail-of-bank-transfer)
