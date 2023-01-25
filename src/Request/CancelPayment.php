@@ -6,7 +6,7 @@ namespace Comgate\Request;
 use Comgate\Client;
 use Comgate\Response\CancelPayment as CancelPaymentResponse;
 
-class PaymentStatus extends BaseRequest
+class CancelPayment extends BaseRequest
 {
     protected static $endpoint = 'cancel';
 

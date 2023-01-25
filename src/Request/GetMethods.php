@@ -22,16 +22,16 @@ class GetMethods extends BaseRequest
      */
     public function __construct($curr = null, $country = null)
     {
-        $this->curr = $curr;
-        $this->country = $country;
+        $curr && $this->setCurr($curr);
+        $country && $this->setCountry($country);
     }
 
     public function getData(): array
     {
         $data = parent::getData();
-        
+
         $data['type'] = 'json';
-        
+
         return $data;
     }
 
@@ -50,7 +50,7 @@ class GetMethods extends BaseRequest
         return $client->send($this);
     }
 
-  /**
+    /**
      * @throws \Comgate\Exception\ErrorCodeException
      * @throws \Comgate\Exception\InvalidArgumentException
      */
