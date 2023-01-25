@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace Comgate;
 
-use Comgate\Request\CreatePayment;
 use Comgate\Request\RequestInterface;
+use Comgate\Response\ResponseInterface;
+
+use GuzzleHttp\Client as HttpClient;
 
 class Client
 {
@@ -24,7 +26,7 @@ class Client
     private $secret;
 
     /**
-     * @var \GuzzleHttp\Client
+     * @var HttpClient
      */
     private $client;
 
@@ -40,17 +42,17 @@ class Client
         $this->test       = $test;
         $this->secret     = $secret;
 
-        $this->client = new \GuzzleHttp\Client([
+        $this->client = new HttpClient([
             'base_uri' => 'https://payments.comgate.cz/v1.0/'
         ]);
     }
 
 
     /**
-     * @param \GuzzleHttp\Client $client
+     * @param HttpClient $client
      * @return $this
      */
-    public function setClient(\GuzzleHttp\Client $client): self
+    public function setClient(HttpClient $client): self
     {
         $this->client = $client;
 
@@ -58,8 +60,8 @@ class Client
     }
 
     /**
-     * @param RequestInterface|CreatePayment $request
-     * @return mixed
+     * @param RequestInterface $request
+     * @return ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Comgate\Exception\ErrorCodeException
      * @throws \Comgate\Exception\InvalidArgumentException

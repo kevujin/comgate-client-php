@@ -7,7 +7,7 @@ use Comgate\Enum\ResponseCode;
 use Comgate\Exception\ErrorCodeException;
 use Comgate\Exception\InvalidArgumentException;
 
-abstract class BaseResponse
+abstract class BaseResponse implements ResponseInterface
 {
     /**
      * @var int
