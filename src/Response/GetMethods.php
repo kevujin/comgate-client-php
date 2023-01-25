@@ -5,9 +5,13 @@ namespace Comgate\Response;
 
 use Comgate\Enum\ResponseCode;
 use Comgate\Exception\InvalidArgumentException;
+use Comgate\Response\Item\Method;
 
 class GetMethods extends BaseResponse
 {
+    /**
+     * @var Method[]
+     */
     public array $methods = [];
 
     /**
@@ -29,6 +33,19 @@ class GetMethods extends BaseResponse
 
         parent::__construct($data);
 
-        $this->methods = $data['methods'] ?? [];
+        $this->methods = array_map(function ($item) {
+            return new Method($item);
+        }, $data['methods'] ?? []);
+    }
+
+    public function getMethod($id) : ?Method
+    {
+        foreach ($this->methods as $method) {
+            if ($method->id == $id) {
+                return $method;
+            }
+        }
+
+        return null;
     }
 }
