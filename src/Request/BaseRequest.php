@@ -58,6 +58,11 @@ abstract class BaseRequest implements RequestInterface
     private $phone;
 
     /**
+     * @var string
+     */
+    private $fullName;
+
+    /**
      * @var string (product identifier)
      */
     private $name;
@@ -188,6 +193,26 @@ abstract class BaseRequest implements RequestInterface
     public function getLabel(): string
     {
         return $this->label;
+    }
+
+    /**
+     * @param string $fullName
+     * @return self
+     */
+    public function setFullName(string $fullName): self
+    {
+        $this->fullName = $fullName;
+
+        return $this;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getFullName(): string
+    {
+        return $this->fullName;
     }
 
     /**

@@ -22,7 +22,8 @@ class CreatePayment extends BaseRequest
         'email',
         'method',
         'curr',
-        'label'
+        'label',
+        'fullName'
     ];
 
     protected static $optional_fields = [
@@ -44,11 +45,12 @@ class CreatePayment extends BaseRequest
     /**
      * CreatePayment constructor.
      * @param int $price
-     * @param string $refId
-     * @param string $email
-     * @param string $label
-     * @param string $method
-     * @param string $curr
+     * @param string $refId Reference ID
+     * @param string $email Customer email
+     * @param string $label Product name
+     * @param string $method Payment method(s)
+     * @param string $curr Currency
+     * @param string $fullName Customer name
      * @throws \Comgate\Exception\LabelTooLongException
      */
     public function __construct(
@@ -57,7 +59,8 @@ class CreatePayment extends BaseRequest
         string $email,
         string $label,
         string $method = Method::ALL,
-        string $curr = 'CZK'
+        string $curr = 'CZK',
+        string $fullName = ''
     ) {
         $this->setPrice($price);
         $this->setRefId($refId);
@@ -65,6 +68,7 @@ class CreatePayment extends BaseRequest
         $this->setLabel($label);
         $this->setMethod($method);
         $this->setCurr($curr);
+        $this->setFullName($fullName);
     }
 
     /**
